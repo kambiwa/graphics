@@ -15,9 +15,9 @@ defmodule Graphics.Application do
       # Start a worker by calling: Graphics.Worker.start_link(arg)
       # {Graphics.Worker, arg},
       # Start to serve requests, typically the last entry
-      ChromicPDF,
+      # ChromicPDF,
       GraphicsWeb.Endpoint
-    ]
+    ] ++ maybe_chromic_pdf()
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
@@ -31,5 +31,13 @@ defmodule Graphics.Application do
   def config_change(changed, _new, removed) do
     GraphicsWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+    defp maybe_chromic_pdf do
+    if System.get_env("DISABLE_CHROMIC_PDF") == "true" do
+      []
+    else
+      [ChromicPDF]
+    end
   end
 end
