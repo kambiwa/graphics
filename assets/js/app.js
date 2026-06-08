@@ -165,3 +165,36 @@ window.addEventListener("phx:download_pdf", (e) => {
   a.click()
   document.body.removeChild(a)
 })
+
+function toggleMobileNav() {
+  const btn    = document.getElementById("mobile-menu-btn");
+  const drawer = document.getElementById("mobile-drawer");
+  const isOpen = btn.getAttribute("aria-expanded") === "true";
+
+  btn.classList.toggle("open", !isOpen);
+  btn.setAttribute("aria-expanded", String(!isOpen));
+  drawer.style.display  = "block";
+  drawer.style.maxHeight = isOpen ? "0" : "500px";
+
+  if (isOpen) {
+    setTimeout(() => { drawer.style.display = "none"; }, 350);
+  }
+}
+
+function closeMobileNav() {
+  const btn    = document.getElementById("mobile-menu-btn");
+  const drawer = document.getElementById("mobile-drawer");
+  btn.classList.remove("open");
+  btn.setAttribute("aria-expanded", "false");
+  drawer.style.maxHeight = "0";
+  setTimeout(() => { drawer.style.display = "none"; }, 350);
+}
+
+// Close drawer when clicking outside
+document.addEventListener("click", (e) => {
+  const nav    = document.getElementById("navbar");
+  const drawer = document.getElementById("mobile-drawer");
+  if (nav && drawer && !nav.contains(e.target) && !drawer.contains(e.target)) {
+    closeMobileNav();
+  }
+});
