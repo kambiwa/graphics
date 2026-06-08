@@ -529,6 +529,43 @@
   .testimonials-section .section-title .line-break {
     display: block;
   }
+  /* Mobile nav drawer links */
+.mob-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 0;
+  border-bottom: 0.5px solid rgba(255,255,255,0.07);
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.mob-link:last-of-type { border-bottom: none; }
+.mob-link:hover { color: #FAF9F7; }
+
+/* Hamburger lines */
+.hb-line {
+  display: block;
+  width: 22px; height: 2px;
+  background: #1a1a18;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+  transform-origin: center;
+}
+#mobile-menu-btn.open .hb-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+#mobile-menu-btn.open .hb-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+#mobile-menu-btn.open .hb-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Show/hide desktop vs mobile */
+@media (max-width: 768px) {
+  #nav-desktop    { display: none !important; }
+  #mobile-menu-btn { display: flex !important; }
+  nav { padding: 0 1.5rem !important; }
+}
   @keyframes charReveal {
     to {
       opacity: 1;
